@@ -1,0 +1,24 @@
+= flash[:notice]
+
+%h1 Search form
+
+=form_tag(controller: :dashboard, action: :search) do
+  =text_field_tag :query
+  =button_tag 'Search', type: :submit
+
+%hr
+
+%h1
+  Analytics
+  =form_tag(controller: :dashboard, action: :purge) do
+    =button_tag 'Purge all', type: :submit
+
+%table
+  %thead
+    %th Text
+    %th Count
+  %tbody
+    - @search_logs.each do |log|
+      %tr
+        %td= log.query
+        %td= log.hits
